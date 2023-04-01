@@ -1,0 +1,116 @@
+Para poder ingresar bien los datos mediante archivos a R deben considerar lo siguiente:
+Para ingresar correctamente un dataframe en R, se puede realizar desde un archivo .txt o en .csv
+
+-En la primera fila van los nombres de las variables del data frame.
+-En la primera columna, los nombres de las observaciones, estos deben ser únicos.
+-Los nombres de las variables (en general, no solo para data frames) deben respetar las condiciones de R, no pueden llevar espacios, ni símbolos especiales. No pueden iniciar con dígitos, y deben ser nombres únicos. Considerar también que R es sensible a las mayúsculas. Lo que sí se puede usar, son los puntos y guiones bajos.
+-No pueden haber filas vacías, ni deben haber comentarios entremedio. Si faltan valores, se deben rellenar con NA
+-Para ingresar fechas, se utiliza el formato americano (MM/DD/AAAA)
+-Los archivos .txt va separado con tabulaciones y puntos (.) para decimales. En archivos .csv en formato inglés, va separado con comas y con puntos (.) para decimales. En formato español va separado por ";" y con "," para decimales.
+
+Estadísticas descriptivas:
+-Calcular Media para una variable
+	mean( <Variable>)
+-Calcular Media para varias columnas:
+	sapply( <ColumnaA,ColumnaB,...>, mean)
+	
+-Calcular Moda (se utiliza el paquete modeest)
+	mfv()
+	
+-Para el calculo de otras medidas como varianza y desviación estandar, se utilizan las debidas formulas escritas en código.
+
+Representación gráfica:
+Para una variable numérica:
+	El histograma resulta muy útil si queremos representar una única variable numérica y la muestra es grande.
+	El gráfico de caja es muy útil, pues su construcción considera 5 estadísticos para representar el conjunto de datos y además facilita la identificación de datos atípicos.
+	
+Para 2 variables numéricas:
+	El gráfico de dispersión es útil porque muestran la información por cada caso, cada punto corresponde a la observación obtenida entre ambas variables. Es útil también apra saber si 2 o más variables están relacionadas tal que pueden ambas aumentar en la misma proporción, o ser independientes entre sí.
+	
+
+
+Para una variable categórica:
+	El gráfico de barras es útil ya que nos muestra según el largo de cada barra la proporción de valores que existen en cada variable.
+	El gráfico de torta también sirve por lo mismo, cada fracción de este circulo muestra la proporción existente de cada variable.
+	
+Para 2 variables categóricas:
+	El gráfico de barras apiladas, agrupadas y estandarizadas visualizan la matriz de confusión de 2 variables y se pueden encontrar las relaciones que hay entre ellas.
+	
+	
+Para 1 variable numérica y 1 categórica:
+	En este caso nos sirve realizar la gráfica con cajas por grupo, donde cada categoría son los niveles que se deben graficar en pos de la cantidad de instancias de estos.
+	Otro grafico util es el gráfico de tiras, parecido al de dispersión pero para 1 variable categórica y otra numérica.
+	
+	
+Variables aleatorias:
+
+	Var. aleatoria continua: es una variable que toma cualquiera de los infinitos valores posibles en un intervalo.
+	Var. aleatoria discreta: es una variable que toma cualquiera de los finitos valores posibles en un intervalo.
+	
+Valor esperado:
+	E(X) o μ, es el resultado promedio obtenido en una variable aleatoria.
+	
+Distribuciones continuas:
+
+Distribución Normal:
+	A.K.A distribución gaussiana, es la que más se utiliza en estadística dado que muchas variables se acercan a esa distribución. Se utiliza porque es unimodal y simétrica, la distribución tiene forma de campana. Esta distribución se utiliza generalmente para modelar varios fenómenos y se ajusta a través de μ (la media, que es lo que se desplaza por el eje X) y σ (Desviación estándar, es la dispersión de los datos respecto a la media)
+
+Distribución Z:
+	A.K.A distribución normal estándar, es la distribución normal pero centrada en 0 y desviación estándar = 1.
+
+Distribución Chi cuadrado:
+	A.K.A ji-cuadrado o χ2, se utiliza principalmente para valores siempre positivos y desviados hacia la derecha, el único parámetro de esta distribución son los grados de libertad (ν). Los grados de libertad son una estimación de la cantidad de observaciones empleadas para calcular un estimador, también se puede entender como la cantidad de valores que pueden cambiar libremente.
+	
+Distribución T-Student:
+	A.K.A distribución T, como χ2 su único parámetro son los grados de libertad mientras más grados de libertad, más se parece a la distribución normal, pero las colas son más gruesas.
+	
+Distribución F:
+	Se utiliza regularmente para la comparación de varianzas, se relaciona con las anteriores de mediante distribuciones χ2 y los grados de libertad.
+	
+Estimadores puntuales:
+	Un estimador puntual es un valor que resume una muestra. Este valor cambia dependiendo de la muestra que se utilice para conseguirlo. Por mucho que el valor se acerque al parámetro de la población, es complicado que sean iguales. El estimador tiende a ser un mejor indicador a medida que se agranda la muestra.
+	Para verificar la presición de un estimador, probamos cuando cambia entre distintas muestras. Si varía muy poco, la estimación es correcta, podemos ver cuanto varía aplicando una distribución muestral, para poder ver la distribución de los estimadores puntales que se tienen, se comprueba con muestras de igual tamaño para una misma población.
+	El teorema del límite central (TLC pa los compas) la distribución de la media muestral se aproxima a la normal, esta aproximación es más precisa mientras aumenta el tamaño de la muestra.
+
+Intervalos de confianza:
+	Como los Estimadores Puntuales, a veces no son del todo preciso, empezaremos a hablar de intervalos de confianza.
+Esto se trata de establecer un rango de valores probables y aceptables para lo que se quiere medir. Este intervalo se construye alrededor del Estimador Puntual. Así es más confiable y se puede aceptar los errores de precisión que puede tener escoger un único estimador, así mediante el TLC se describe de mejor forma los estadísticos, considerando así también un margen de error estimado del estimador puntual.
+
+Prueba Z:
+Esta prueba nos sirve para asegurar o descartar que la media de la población tiene cierto valor hipotético.
+
+Esta prueba se puede aplicar solo si cumple 3 condiciones:
+1.- Si la muestra >= 30 observaciones se puede aplicar, si no, se necesita la varianza.
+2.- Observaciones independientes.
+3.- Población sigue una distribución normal
+
+Para verificar que la población sigue una distribución normal se puede hacer mediante el gráfico cuantil-cuantil, realizando una observación detallada del gráfico y ver si hay valores atípicos para una distribución normal o no. También se puede verificar la distribución usando la prueba de Shapiro-Wilk [shapiro.test(x) en R, donde x es el vector con las observaciones].
+
+Para realizar la prueba Z, comenzamos por calcular un estadístico de prueba con Z = (x − μ) / σ 
+x: observación de una distribución normal.
+μ: media
+σ: desviación estándar
+
+así obtenemos el valor p (En R, cuando se calcula este valor, corresponde al cálculo de una sola cola, por lo que debe multiplicarse por 2 para considerarlo bilateral), luego con R se calcula 2*pnorm(<valor>,lower.tail=FALSE), el valor que se obtenga se compara con el nivel de significación, si es menor se rechaza la hipótesis que se está comprobando.
+
+
+Prueba T:
+En el caso de no tener suficiente tamaño de muestra y no disponer de la varianza no se puede usar la prueba Z, por lo que se utiliza en estos casos la prueba T de Student, esta se utiliza para hasta 2 medias muestrales.
+
+Para 1 muestra:
+Se deben cumplir 2 condiciones para su uso:
+	1.- Las observaciones son independientes entre sí.
+	2.- Las observaciones provienen de una distribución cercana a la normal.
+
+Son casi las mismas condiciones que para Z, pero aquí no se necesita un tamaño de muestra, ni la varianza. Esto se debe a que la prueba T se regula por los grados de libertad, a medida que aumentan, más se asemeja a la distribución normal.
+v=n-1 (v: grados de libertad, n: tamaño muestra, 1: 1 xD)
+
+Al igual que en Z, se puede verificar la distribución por el gráfico Q-Q o por Shapiro-Wilk, el estadístico T de la prueba se obtiene con T = (x − μ0) / s / √n , para obtener el valor p, en este caso se utiliza la función pt() de R, y luego se compara con el ɑ, si p < ɑ.
+
+Luego se calcula el intervalo de confianza con x ± t∗ · SE, donde t* se obtiene a partir del nivel de confianza y la distribución t con v grados de libertad, se utiliza la función qt() en R y SE es el error estándar.
+
+En R esta prueba se realiza más rápido con t.test(x, alternative, mu, conf.level),
+x: muestra.
+alternative: tipo de prueba (two.sided - bilateral, greater - unilateral para media > mu, less - unilateral para media < mu).
+mu: valor nulo.
+conf.level: lvl de confianza.
